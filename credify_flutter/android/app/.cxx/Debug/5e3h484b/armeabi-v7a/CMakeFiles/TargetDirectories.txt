@@ -1,0 +1,2 @@
+C:/MobileDev/flutter_projects/credify/credify_flutter/android/app/.cxx/Debug/5e3h484b/armeabi-v7a/CMakeFiles/edit_cache.dir
+C:/MobileDev/flutter_projects/credify/credify_flutter/android/app/.cxx/Debug/5e3h484b/armeabi-v7a/CMakeFiles/rebuild_cache.dir
