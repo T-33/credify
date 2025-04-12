@@ -17,10 +17,10 @@ export async function getAllUsers() {
     return users;
 }
 
-export async function getUserById(id) {
+export async function getUserByPin(pin) {
     const knex = await getKnex();
     const user = await knex('users')
-        .where({ id })
+        .where({ pin })
         .first();
 
     return user;

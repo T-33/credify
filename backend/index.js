@@ -7,6 +7,7 @@ import {
     usersRouter,
     authRouter,
     postsRouter,
+    supportRouter,
 } from './controllers/index.js';
 
 async function main() {
@@ -45,33 +46,35 @@ async function main() {
     app.use(authRouter.routes());
     app.use(authRouter.allowedMethods());
 
-    app.use(async (ctx, next) => {
-        const { headers } = ctx.request;
-
-        console.log(headers);
-        const { authorization } = headers;
-
-        const token = authorization?.split(' ')[1];
-
-        console.log({ token });
-
-        if (token) {
-            const userInfo = (await knex.raw(`
-                select * from tokens
-                inner join users
-                    on users.id = tokens.user_id
-                where tokens.token = ?
-            `, [token])).rows[0];
-
-            if (!userInfo) {
-                throw new Error('Unauthorized');
-            }
-
-            ctx.state.user = userInfo;
-        }
-
-        return next();
-    });
+    app.use(supportRouter.routes());
+    //
+    // app.use(async (ctx, next) => {
+    //     const { headers } = ctx.request;
+    //
+    //     console.log(headers);
+    //     const { authorization } = headers;
+    //
+    //     const token = authorization?.split(' ')[1];
+    //
+    //     console.log({ token });
+    //
+    //     if (token) {
+    //         const userInfo = (await knex.raw(`
+    //             select * from tokens
+    //             inner join users
+    //                 on users.id = tokens.user_id
+    //             where tokens.token = ?
+    //         `, [token])).rows[0];
+    //
+    //         if (!userInfo) {
+    //             throw new Error('Unauthorized');
+    //         }
+    //
+    //         ctx.state.user = userInfo;
+    //     }
+    //
+    //     return next();
+    // });
 
 
     app.use(usersRouter.routes());

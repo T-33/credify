@@ -1,7 +1,6 @@
 import Router from 'koa-router';
 import {
     getAllUsers,
-    getUserById,
     deleteUserById,
 } from '../services/index.js';
 
@@ -12,15 +11,6 @@ usersRouter.get('/users', async (ctx) => {
 
     ctx.body = {
         users: allUsers,
-    };
-    ctx.status = 200;
-});
-
-usersRouter.get('/users/:id', async (ctx) => {
-    const user = await getUserById(ctx.params.id);
-
-    ctx.body = {
-        user,
     };
     ctx.status = 200;
 });
